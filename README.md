@@ -14,11 +14,8 @@ PySide6 Live Chart Dashboard is a real-time chart visualization tool built with 
 ### Prerequisites
 - Python 3.11+
 - Poetry (for dependency management)
-
-### Install Dependencies
-```sh
-poetry install
-```
+- npm (for building Sun Editor & Chart.js)
+- vite (for development)
 
 ## License
 MIT License. See `LICENSE` for details.
