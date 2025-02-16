@@ -11,9 +11,29 @@
 
 <div id="editor-container">
     <textarea id="editor"></textarea>
-    <button id="update-chart">Update Chart</button>
+    <button id="update-chart" onclick="sendMessage()">Update Chart</button>
 </div>
 
+<script type="text/javascript" src="qrc:///qtwebchannel/qwebchannel.js"></script>
+<script type="text/javascript">
+    let handler;
+
+    function setupWebChannel() {
+        new QWebChannel(qt.webChannelTransport, function (channel) {
+            handler = channel.objects.handler;
+        });
+    }
+
+    function sendMessage() {
+        handler.sendMessage("editor", "test");
+    }
+
+    function receiveMessage(msg) {
+        console.log(msg)
+    }
+
+    window.onload = setupWebChannel;
+</script>
 
 </body>
 </html>

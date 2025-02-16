@@ -16,14 +16,12 @@ if TYPE_CHECKING:
 _logger = get_logger(__name__)
 
 
-class CenterUtils:
-    @staticmethod
-    def center(widget: QWidget, offset_x=0, offset_y=0):
-        screen_rect = widget.screen().availableGeometry()
-        widget_rect = widget.frameGeometry()
-        center_point = screen_rect.center() + QPoint(offset_x, offset_y)
-        widget_rect.moveCenter(center_point)
-        widget.move(widget_rect.topLeft())
+def align_center(widget: QWidget, offset_x=0, offset_y=0):
+    screen_rect = widget.screen().availableGeometry()
+    widget_rect = widget.frameGeometry()
+    center_point = screen_rect.center() + QPoint(offset_x, offset_y)
+    widget_rect.moveCenter(center_point)
+    widget.move(widget_rect.topLeft())
 
 
 def read_stylesheet(style_sheets: list[str] = None) -> str:
