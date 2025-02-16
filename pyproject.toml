@@ -1,15 +1,19 @@
 [project]
 name = "pyside6-live-chart-dashboard"
 version = "0.1.0"
-description = ""
+description = "PySide6 Live Chart Dashboard is a real-time chart visualization tool built"
 authors = [
-    {name = "Hayes",email = "92khsang@gmail.com"}
+    {name = "Hayes", email = "92khsang@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.14"
 dependencies = [
+    "PySide6>=6.8.0,<7.0.0",
+    "qt-stylehelper @ git+https://github.com/92khsang/qt-stylehelper.git@dev"
 ]
 
+[tool.poetry]
+package-mode = false
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
