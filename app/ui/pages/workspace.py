@@ -82,7 +82,13 @@ class WorkspaceUI(BaseUI):
 
     def process_message(self, sender: str, message: str) -> None:
         self._logger.debug(f"Message from {sender}: {message}")
-        self.editor_view.page().runJavaScript(f"receiveMessage('{sender}: {message}')")
+        # Dispatch event in JavaScript only if the frontend is listening
+        js_script = f"""
+            document.dispatchEvent(new CustomEvent('webChannelMessage', {{
+                detail: {{ channelName: "{sender}", message: "{message}" }}
+            }}));
+        """
+        self.editor_view.page().runJavaScript(js_script)
 
     def _clear_widget_reference(self) -> None:
         self.editor_view = None

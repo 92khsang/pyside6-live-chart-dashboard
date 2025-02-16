@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { WebChannelHandler } from "@/js/webchannel";
 
 import 'suneditor/dist/css/suneditor.min.css';
 import SunEditor from "suneditor";
@@ -103,3 +104,18 @@ editor.onPaste = function (e, cleanData, maxCharCount, core) {
     e.preventDefault();
     return false;
 };
+
+
+const webChannel = WebChannelHandler.getInstance();
+
+async function setupEditor() {
+    await webChannel.registerCallback("editor", (msg) => {
+        console.log("Message from Python (editor):", msg);
+    });
+
+    document.getElementById("update-chart")?.addEventListener("click", async () => {
+        await webChannel.sendMessage("editor", "update");
+    });
+}
+
+setupEditor();

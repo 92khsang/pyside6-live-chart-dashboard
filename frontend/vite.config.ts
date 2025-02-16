@@ -1,5 +1,5 @@
-import { defineConfig } from "vite";
-import { resolve } from "path";
+import {defineConfig} from "vite";
+import {resolve} from "path";
 
 export default defineConfig({
     root: "src",
@@ -10,11 +10,12 @@ export default defineConfig({
         }
     },
     build: {
-        outDir: "../../assets",
+        outDir: "../../static",
         emptyOutDir: true,
         rollupOptions: {
             input: {
-                main: resolve(__dirname, "src", "index.html"),
+                editor: resolve(__dirname, "src", "html", "editor.html"),
+                preview: resolve(__dirname, "src", "html", "chart.html")
             }
         }
     },

@@ -44,7 +44,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.editor is None:
-        args.editor = Path(__file__).parent.parent / "assets" / "index.html"
+        args.editor = Path(__file__).parent.parent / "static" / "html" / "editor.html"
 
     main(
         app_version=args.version,

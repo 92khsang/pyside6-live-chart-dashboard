@@ -16,17 +16,25 @@ if TYPE_CHECKING:
 
 
 class WebChannelHandler(QObject):
-    message_received = Signal(str, str)
+    receive_channel = Signal(str, str)
+    send_channel = Signal(str, str)
 
     def __init__(
         self,
-        message_received: Callable[[str, str], None],
+        receive_channel: Callable[[str, str], None],
         parent: QWidget | None = None,
     ):
         super().__init__(parent)
 
-        self.message_received.connect(message_received)
+        self.receive_channel.connect(receive_channel)
+
+    @Slot("QVariant")
+    def setup_translate_py2js(self, callback: Callable[[str, str], None]):
+        self.send_channel.connect(callback)
+
+    def translate_py2js(self, sender, message):
+        self.send_channel.emit(sender, message)
 
     @Slot(str, str)
-    def sendMessage(self, sender, message):
-        self.message_received.emit(sender, message)
+    def translate_js2py(self, sender, message):
+        self.receive_channel.emit(sender, message)
